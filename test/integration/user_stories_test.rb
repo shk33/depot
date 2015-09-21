@@ -58,6 +58,8 @@ class UserStoriesTest < ActionDispatch::IntegrationTest
 
     # Verify the email has the correct data
     mail = ActionMailer::Base.deliveries.last
-
+    assert_equal ["dave@example.com"], mail.to
+    assert_equal "SHK33 Rails <rails.loco@loco.com>", mail[:from].value
+    assert_equal "Pragmatic Store Order Confirmation", mail.subject
   end
 end
