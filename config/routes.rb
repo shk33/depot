@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
-  # Root Route
-  root 'store#index', as: 'store'
+  scope '(:locale)' do
+    # Root Route
+    root 'store#index', as: 'store', via: :all
+    resources :orders
+    resources :line_items
+    resources :carts
+  end
 
   # Sessions
   controller :sessions do
@@ -11,9 +16,6 @@ Rails.application.routes.draw do
 
   # Store related routes
   resources :users
-  resources :orders
-  resources :line_items
-  resources :carts
 
   get 'store/index'
   resources :products do
